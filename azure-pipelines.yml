@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  name: 'online-survey_pool'
+  vmImage: 'windows-latest'
 
 variables:
   solution: '**/*.sln'
