@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: 'windows-2019'
+  name: 'Default'
 
 variables:
   solution: '**/*.sln'
@@ -19,7 +19,7 @@ steps:
   inputs:
     packageType: 'sdk'
     version: '6.x'
-    installationPath: $(Agent.ToolsDirectory)/dotnet
+    installationPath: '/home/azureuser/agent/dotnet'
 
 - task: NuGetToolInstaller@1
 
@@ -42,17 +42,17 @@ steps:
 #- task: DotNetCoreCLI@2
 #    publishWebProjects: true
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
+#- task: PublishBuildArtifacts@1
+ # inputs:
+    ##PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+   # ArtifactName: 'drop'
+    #publishLocation: 'Container'
 
-- task: AzureRmWebAppDeployment@4
-  inputs:
-    ConnectionType: 'AzureRM'
-    azureSubscription: 'Free Trial(02dd8a70-8b78-44e2-bb9e-56d6e1188f39)'
-    appType: 'webApp'
-    WebAppName: 'onlinesurvey'
-    VirtualApplication: '/'
-    packageForLinux: '$(Build.ArtifactStagingDirectory)/**/*.zip'
+#- task: AzureRmWebAppDeployment@4
+  #inputs:
+    #ConnectionType: 'AzureRM'
+    #azureSubscription: 'Free Trial(02dd8a70-8b78-44e2-bb9e-56d6e1188f39)'
+    #appType: 'webApp'
+    #WebAppName: 'onlinesurvey'
+    #VirtualApplication: '/'
+    #packageForLinux: '$(Build.ArtifactStagingDirectory)/**/*.zip'
